@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2b1638">
+<title>Regina cumple 9 · Pop Star Party | ÉVORA</title>
+<meta name="description" content="Tienes un pase VIP para la fiesta más pop del año: Regina cumple 9. Invitación de demostración ÉVORA.">
+
+<!-- Al compartir por WhatsApp / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="✦ Pase VIP · Regina cumple 9">
+<meta property="og:description" content="La fiesta más pop del año. Abre tu pase y confirma tu lugar.">
+<meta property="og:image" content="og.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="hero.webp">
+
+<style>
+/* =====================================================================
+   POP STAR PARTY — colores y tipografías. Cambia aquí la identidad.
+   ===================================================================== */
+:root{
+  --night:   #2b1638;   /* fondo profundo (portada) */
+  --plum:    #3b1d4a;   /* texto principal */
+  --lilac:   #d9c8e6;   /* fondo general */
+  --lilac-2: #ece2f3;
+  --pink:    #f7b3d4;   /* rosa suave */
+  --hot:     #ff5fa8;   /* rosa intenso: botones y acentos */
+  --chrome:  #f6f1fb;   /* brillo plateado */
+  --muted:   #7a6489;
+
+  --display: 'Bodoni Moda', Georgia, serif;
+  --hand:    'Caveat', 'Comic Sans MS', cursive;
+  --sans:    'DM Sans', system-ui, Arial, sans-serif;
+
+  --ease: cubic-bezier(.22,1,.36,1);
+  --pad: clamp(20px, 6vw, 44px);
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body{
+  margin: 0; color: var(--plum); font: 400 16px/1.6 var(--sans);
+  background: var(--lilac); overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+body.locked{ overflow: hidden; height: 100dvh; }
+h1,h2,h3{ margin: 0; font-weight: 500; line-height: 1.02; }
+p{ margin: 0; }
+a{ color: inherit; }
+img{ display: block; max-width: 100%; }
+button,input,textarea{ font: inherit; color: inherit; }
+button{ cursor: pointer; }
+[hidden]{ display: none !important; }
+:focus-visible{ outline: 3px solid var(--hot); outline-offset: 3px; border-radius: 6px; }
+
+.wrap{ width: min(100% - 2 * var(--pad), 560px); margin-inline: auto; }
+.hand{ font-family: var(--hand); font-weight: 700; }
+.kicker{ font: 700 11px var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--hot); }
+
+/* Botones ------------------------------------------------------------- */
+.btn{
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px; padding: 14px 28px; border-radius: 999px; border: 0;
+  font: 700 14px var(--sans); letter-spacing: .04em; text-decoration: none;
+  color: #fff; background: linear-gradient(135deg, #ff7cb8, var(--hot) 55%, #d94bd0);
+  box-shadow: 0 14px 30px -12px rgba(255,95,168,.8), inset 0 1px 0 rgba(255,255,255,.45);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 34px -12px rgba(255,95,168,.9), inset 0 1px 0 rgba(255,255,255,.45); }
+.btn:active{ transform: scale(.97); }
+.btn.soft{ background: #fff; color: var(--plum); box-shadow: 0 10px 24px -16px rgba(59,29,74,.6); }
+.btn.block{ width: 100%; }
+
+/* Brillos que titilan (los crea el script) ------------------------------ */
+.sparkles{ overflow: hidden; pointer-events: none; }
+.sparkle{ position: absolute; width: var(--s,14px); height: var(--s,14px); pointer-events: none; color: #fff; opacity: 0;
+  animation: twinkle var(--d,3.6s) ease-in-out var(--delay,0s) infinite; filter: drop-shadow(0 0 6px rgba(255,170,220,.9)); }
+.sparkle svg{ width: 100%; height: 100%; }
+@keyframes twinkle{ 0%,100%{ opacity: 0; transform: scale(.4) rotate(0); } 45%{ opacity: 1; transform: scale(1) rotate(25deg); } }
+
+/* =====================================================================
+   1 · PORTADA — un pase VIP que se abre
+   ===================================================================== */
+.intro{
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 24px;
+  background:
+    radial-gradient(60% 45% at 50% 20%, rgba(255,95,168,.35), transparent 70%),
+    radial-gradient(70% 50% at 50% 100%, rgba(170,120,230,.35), transparent 70%),
+    var(--night);
+  transition: opacity .9s var(--ease), visibility .9s;
+}
+.intro.gone{ opacity: 0; visibility: hidden; }
+.intro .sparkles{ position: absolute; inset: 0; overflow: hidden; }
+
+.pass-wrap{ position: relative; display: grid; justify-items: center; gap: 26px; text-align: center; }
+.lanyard{ width: 44px; height: 70px; margin-bottom: -34px; border-radius: 6px 6px 0 0;
+  background: repeating-linear-gradient(90deg, #ff5fa8 0 6px, #ffd1e8 6px 12px); opacity: .9; }
+.pass{
+  position: relative; width: min(78vw, 300px); aspect-ratio: 5/8; border-radius: 22px; overflow: hidden; color: #fff;
+  background: #1b0e24; box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.18);
+  transform-style: preserve-3d; animation: float 5s ease-in-out infinite;
+  transition: transform 1s var(--ease), opacity .8s var(--ease);
+}
+.pass::after{ /* reflejo holográfico */
+  content: ''; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,180,230,.45) 45%, rgba(170,220,255,.35) 52%, transparent 65%);
+  background-size: 250% 250%; animation: holo 4.5s ease-in-out infinite;
+}
+@keyframes holo{ 0%,100%{ background-position: 100% 0; } 50%{ background-position: 0 100%; } }
+@keyframes float{ 0%,100%{ transform: translateY(0) rotate(-1.5deg); } 50%{ transform: translateY(-10px) rotate(1.5deg); } }
+.pass-hole{ position: absolute; top: 14px; left: 50%; width: 48px; height: 10px; translate: -50% 0; border-radius: 99px; background: var(--night); z-index: 3; }
+.pass-photo{ position: absolute; inset: 0; background: url(hero.webp) center 18% / cover; }
+.pass-photo::after{ content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,14,36,.25) 0%, transparent 30%, rgba(27,14,36,.35) 55%, rgba(27,14,36,.95) 82%); }
+.pass-top{ position: absolute; top: 34px; left: 0; right: 0; z-index: 2; font: 700 10px var(--sans); letter-spacing: .32em; }
+.pass-body{ position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 2; text-align: left; }
+.pass-body .hand{ font-size: 24px; color: var(--pink); line-height: 1; }
+.pass-body h1{ font: 500 44px/0.95 var(--display); margin: 2px 0 10px; }
+.pass-meta{ display: flex; justify-content: space-between; gap: 10px; border-top: 1px dashed rgba(255,255,255,.35); padding-top: 10px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.pass-meta b{ display: block; font-size: 13px; letter-spacing: .04em; }
+.intro.opening .pass{ transform: translateY(-30px) scale(1.12) rotateY(14deg); opacity: 0; animation: none; }
+.intro-note{ color: rgba(255,255,255,.75); font-size: 13px; max-width: 30ch; }
+.intro-note .hand{ font-size: 22px; color: var(--pink); display: block; }
+
+/* =====================================================================
+   2 · HERO con la foto completa
+   ===================================================================== */
+.hero{ position: relative; background: var(--night); color: #fff; overflow: hidden; }
+.hero-img{ width: 100%; max-width: 620px; margin-inline: auto; aspect-ratio: 941/1672; object-fit: cover; }
+.hero::before, .hero::after{ content: ''; position: absolute; left: 0; right: 0; pointer-events: none; z-index: 1; }
+.hero::before{ top: 0; height: 22%; background: linear-gradient(var(--night), transparent); }
+.hero::after{ bottom: 0; height: 46%; background: linear-gradient(transparent, rgba(43,22,56,.85) 55%, var(--night)); }
+.hero .sparkles{ position: absolute; inset: 0; z-index: 2; }
+.hero-copy{ position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 0 var(--pad) 46px; text-align: center; }
+.hero-copy .hand{ font-size: clamp(26px, 7vw, 34px); color: var(--pink); }
+.hero-name{ font: 500 clamp(62px, 19vw, 110px)/.9 var(--display); letter-spacing: -.02em; text-shadow: 0 6px 30px rgba(255,95,168,.55); }
+.hero-age{ display: inline-grid; place-items: center; margin: 14px 0 12px; width: 74px; height: 74px; border-radius: 50%;
+  font: 500 40px var(--display); color: var(--night);
+  background: radial-gradient(circle at 30% 25%, #fff, #f6d6ea 45%, #d9b6ea); box-shadow: 0 0 0 6px rgba(255,255,255,.15), 0 0 40px rgba(255,140,200,.7); }
+.hero-date{ font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+.scroll-cue{ display: block; margin-top: 18px; font-size: 22px; color: var(--pink); animation: bob 2s ease-in-out infinite; }
+@keyframes bob{ 50%{ transform: translateY(6px); } }
+
+/* =====================================================================
+   Secciones generales
+   ===================================================================== */
+section.block{ position: relative; padding: 76px 0; }
+.center{ text-align: center; }
+.title{ font: 500 clamp(36px, 10vw, 52px)/1 var(--display); margin: 10px 0 14px; }
+.title em{ color: var(--hot); }
+.lead{ color: var(--muted); max-width: 40ch; margin-inline: auto; }
+
+/* Doodles a mano (como la foto) */
+.doodle{ position: absolute; color: var(--hot); opacity: .55; pointer-events: none; }
+.doodle svg{ width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Mensaje */
+.message{ background: linear-gradient(180deg, var(--night), #5a2f6e 30%, var(--lilac) 100%); color: #fff; padding-top: 30px; }
+.message .note{ font: 700 clamp(30px, 8.6vw, 40px)/1.12 var(--hand); color: #fff; max-width: 17ch; margin: 0 auto; }
+.message .note span{ color: var(--pink); }
+.message .sign{ margin-top: 16px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.8); }
+
+/* Cuenta regresiva */
+.countdown{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 26px; }
+.tick{ padding: 18px 4px 14px; border-radius: 18px; background: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 16px 30px -22px rgba(59,29,74,.7); backdrop-filter: blur(8px); }
+.tick b{ display: block; font: 500 clamp(30px, 9vw, 42px)/1 var(--display); color: var(--plum); font-variant-numeric: tabular-nums; }
+.tick small{ font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.count-done{ margin-top: 22px; font: 700 28px var(--hand); color: var(--hot); }
+
+/* Detalles */
+.details{ background: var(--lilac-2); }
+.cards{ display: grid; gap: 14px; margin-top: 30px; }
+.card{ display: grid; grid-template-columns: 54px 1fr; gap: 16px; align-items: center; padding: 18px; border-radius: 20px; background: #fff;
+  box-shadow: 0 18px 34px -26px rgba(59,29,74,.7); }
+.card .ico{ width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; color: var(--hot);
+  background: linear-gradient(135deg, #ffe3f1, #e9dcff); }
+.card .ico svg{ width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card small{ display: block; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.card strong{ display: block; font: 500 21px/1.2 var(--display); margin-top: 2px; }
+.card p{ font-size: 13.5px; color: var(--muted); }
+.card-actions{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.card-actions .btn{ min-height: 48px; padding: 12px 14px; font-size: 12.5px; }
+
+/* Setlist (programa) */
+.setlist{ background: var(--night); color: #fff; overflow: hidden; }
+.setlist .wrap{ position: relative; z-index: 1; }
+.setlist .sparkle{ opacity: .6; }
+.setlist .title em{ color: var(--pink); }
+.setlist .lead{ color: rgba(255,255,255,.7); }
+.tracks{ list-style: none; margin: 34px 0 0; padding: 0; counter-reset: t; }
+.tracks li{ counter-increment: t; display: grid; grid-template-columns: 38px 64px 1fr; gap: 12px; align-items: baseline;
+  padding: 16px 4px; border-bottom: 1px solid rgba(255,255,255,.12); }
+.tracks li::before{ content: counter(t, decimal-leading-zero); font: 700 12px var(--sans); color: var(--pink); letter-spacing: .1em; }
+.tracks time{ font-size: 13px; color: rgba(255,255,255,.65); font-variant-numeric: tabular-nums; }
+.tracks strong{ display: block; font: 500 20px/1.2 var(--display); }
+.tracks span{ font-size: 13px; color: rgba(255,255,255,.65); }
+
+/* Dress code */
+.dress{ background: var(--lilac); }
+.swatches{ display: flex; justify-content: center; gap: 12px; margin: 26px 0 14px; }
+.swatches i{ width: 46px; height: 46px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 10px 20px -12px rgba(59,29,74,.8); }
+.dress .hand{ font-size: 26px; color: var(--hot); }
+
+/* Confirmación */
+.rsvp{ background: linear-gradient(160deg, #ffe0ef 0%, #ecdcff 60%, var(--lilac) 100%); }
+.form{ margin-top: 28px; padding: 24px 20px; border-radius: 26px; background: rgba(255,255,255,.75); border: 1px solid #fff;
+  box-shadow: 0 30px 60px -40px rgba(59,29,74,.8); backdrop-filter: blur(10px); text-align: left; }
+.field{ margin-bottom: 18px; }
+.field > label, .field > .label{ display: block; font-size: 12px; font-weight: 700; letter-spacing: .06em; margin-bottom: 8px; }
+.field input, .field textarea{ width: 100%; min-height: 52px; padding: 14px 16px; border-radius: 14px; border: 1.5px solid #e4d6ee; background: #fff; font-size: 16px; }
+.field input:focus, .field textarea:focus{ outline: 0; border-color: var(--hot); box-shadow: 0 0 0 4px rgba(255,95,168,.15); }
+.field textarea{ min-height: 92px; resize: vertical; }
+.choice{ position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.choice input{ position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.choice label{ display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; border-radius: 14px; border: 1.5px solid #e4d6ee; background: #fff; font-weight: 700; font-size: 14px; cursor: pointer; transition: all .2s var(--ease); }
+.choice input:checked + label{ background: var(--plum); color: #fff; border-color: var(--plum); }
+.choice input:focus-visible + label{ outline: 3px solid var(--hot); outline-offset: 2px; }
+.stepper{ display: grid; grid-template-columns: 52px 1fr 52px; align-items: center; border-radius: 14px; border: 1.5px solid #e4d6ee; background: #fff; overflow: hidden; }
+.stepper button{ height: 52px; border: 0; background: #faf5fd; font-size: 22px; color: var(--hot); }
+.stepper output{ text-align: center; font: 500 24px var(--display); }
+.form-note{ margin-top: 12px; font-size: 12px; color: var(--muted); text-align: center; }
+.demo-box{ margin-top: 14px; padding: 14px; border-radius: 14px; background: #fff6fb; border: 1px dashed var(--hot); font-size: 13px; white-space: pre-line; }
+
+/* Footer */
+.footer{ background: var(--night); color: rgba(255,255,255,.75); text-align: center; padding: 56px 0 110px; }
+.footer .hand{ font-size: 30px; color: var(--pink); }
+.footer small{ display: block; margin-top: 18px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; }
+.footer a{ color: var(--pink); }
+
+/* Botón de música flotante */
+.music{ position: fixed; right: calc(14px + env(safe-area-inset-right)); bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 40;
+  width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); color: #fff; font-size: 20px;
+  background: rgba(43,22,56,.8); backdrop-filter: blur(10px); box-shadow: 0 10px 24px -10px rgba(0,0,0,.6); }
+.music.playing{ animation: pulse 1.6s ease-in-out infinite; background: var(--hot); }
+@keyframes pulse{ 50%{ box-shadow: 0 0 0 10px rgba(255,95,168,.2); } }
+
+/* Botón de regreso al catálogo ÉVORA */
+.evora-back{ position: fixed; left: calc(12px + env(safe-area-inset-left)); bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 40;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 10px 16px; border-radius: 999px; text-decoration: none;
+  background: rgba(43,22,56,.8); color: #fff; border: 1px solid rgba(255,255,255,.35); font: 700 12px var(--sans); letter-spacing: .06em; backdrop-filter: blur(10px); }
+body.locked .music, body.locked .evora-back{ display: none; }
+
+.toast{ position: fixed; left: 50%; bottom: 84px; translate: -50% 0; z-index: 60; padding: 12px 20px; border-radius: 999px; background: var(--plum); color: #fff; font-size: 13px; font-weight: 700; box-shadow: 0 14px 30px -10px rgba(0,0,0,.5); }
+
+/* Aparición al hacer scroll */
+.reveal{ opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.in{ opacity: 1; transform: none; }
+
+@media (min-width: 700px){
+  .cards{ grid-template-columns: 1fr 1fr; }
+  .cards .card.wide{ grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation: none !important; transition: none !important; }
+  .reveal{ opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- =====================================================================
+     1 · PORTADA: el pase VIP
+     ===================================================================== -->
+<div class="intro" id="intro" role="dialog" aria-label="Portada de la invitación">
+  <div class="sparkles" data-sparkles="22"></div>
+  <div class="pass-wrap">
+    <div class="lanyard" aria-hidden="true"></div>
+    <div class="pass" aria-hidden="true">
+      <span class="pass-hole"></span>
+      <div class="pass-photo"></div>
+      <p class="pass-top">✦ PASE VIP · BACKSTAGE ✦</p>
+      <div class="pass-body">
+        <span class="hand">pop star party</span>
+        <h1>Regina<br>cumple 9</h1>
+        <div class="pass-meta">
+          <span>Fecha<b>16 · ENE</b></span>
+          <span>Acceso<b>Total</b></span>
+          <span>Fila<b>Rosa ♡</b></span>
+        </div>
+      </div>
+    </div>
+    <p class="intro-note"><span class="hand">tienes un pase VIP ✦</span>Ábrelo para descubrir todos los detalles.</p>
+    <button class="btn" id="openBtn" type="button">Abrir mi pase ✦</button>
+  </div>
+</div>
+
+<main id="main">
+  <!-- =====================================================================
+       2 · HERO
+       ===================================================================== -->
+  <header class="hero">
+    <img class="hero-img" src="hero.webp" width="941" height="1672" alt="Ilustración de un grupo pop en tonos rosa con brillos y estrellas dibujadas a mano">
+    <div class="sparkles" data-sparkles="16"></div>
+    <div class="hero-copy">
+      <p class="hand">la fiesta más pop del año</p>
+      <h2 class="hero-name">Regina</h2>
+      <div class="hero-age" aria-label="cumple 9 años">9</div>
+      <p class="hero-date">Sábado · 16 · Enero · 2027</p>
+      <a class="scroll-cue" href="#mensaje" aria-label="Ver más">↓</a>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       3 · MENSAJE + CUENTA REGRESIVA
+       ===================================================================== -->
+  <section class="block message center" id="mensaje">
+    <span class="doodle" style="top:40px;left:8%;width:34px;height:34px" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 3l4.5 11.5L36 16l-9 8 3 12-10-6.5L10 36l3-12-9-8 11.5-1.5z"/></svg></span>
+    <span class="doodle" style="top:90px;right:9%;width:40px;height:30px;color:var(--pink)" aria-hidden="true"><svg viewBox="0 0 44 32"><path d="M22 28C10 20 4 14 4 9a7 7 0 0 1 13-3.5L22 10l5-4.5A7 7 0 0 1 40 9c0 5-6 11-18 19z"/></svg></span>
+    <div class="wrap">
+      <p class="note reveal">Prepárate para brillar: <span>estás en la lista VIP</span> de mi cumpleaños ✦</p>
+      <p class="sign reveal">— Regina</p>
+
+      <div class="reveal" style="margin-top:56px">
+        <p class="kicker" style="color:#fff">El show empieza en</p>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="tick"><b data-unit="d">00</b><small>Días</small></div>
+          <div class="tick"><b data-unit="h">00</b><small>Horas</small></div>
+          <div class="tick"><b data-unit="m">00</b><small>Min</small></div>
+          <div class="tick"><b data-unit="s">00</b><small>Seg</small></div>
+        </div>
+        <p class="count-done" id="countDone" hidden>¡Hoy es la fiesta! ✦</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       4 · DETALLES
+       ===================================================================== -->
+  <section class="block details center" id="detalles">
+    <div class="wrap">
+      <p class="kicker reveal">Tu pase incluye</p>
+      <h2 class="title reveal">Los <em>detalles</em></h2>
+
+      <div class="cards">
+        <article class="card reveal">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M12 13.2l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 15.3l2-.3z"/></svg></span>
+          <div style="text-align:left"><small>Cuándo</small><strong>Sábado 16 de enero</strong><p>2027</p></div>
+        </article>
+        <article class="card reveal">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+          <div style="text-align:left"><small>Hora</small><strong>4:00 – 8:00 pm</strong><p>Llega a tiempo a la alfombra rosa</p></div>
+        </article>
+        <article class="card wide reveal">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><path d="M12 7.4l.8 1.6 1.8.3-1.3 1.2.3 1.8-1.6-.85-1.6.85.3-1.8-1.3-1.2 1.8-.3z"/></svg></span>
+          <div style="text-align:left">
+            <small>Dónde</small><strong>Jardín Aurora</strong>
+            <p id="address">Av. de las Estrellas 123, Puerto Vallarta, Jal.</p>
+          </div>
+        </article>
+      </div>
+      <div class="card-actions reveal">
+        <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">Cómo llegar ↗</a>
+        <button class="btn soft" id="calBtn" type="button">Guardar fecha</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       5 · SETLIST (programa)
+       ===================================================================== -->
+  <section class="block setlist" id="programa">
+    <div class="sparkles" data-sparkles="10" style="position:absolute;inset:0"></div>
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker reveal" style="color:var(--pink)">Setlist de la fiesta</p>
+        <h2 class="title reveal">El <em>show</em></h2>
+        <p class="lead reveal">Así va a estar la tarde, canción por canción.</p>
+      </div>
+      <ol class="tracks">
+        <li class="reveal"><time>4:00 pm</time><div><strong>Alfombra rosa</strong><span>Llegada y fotos de estrella</span></div></li>
+        <li class="reveal"><time>4:45 pm</time><div><strong>Glitter studio</strong><span>Pulseras, brillos y accesorios</span></div></li>
+        <li class="reveal"><time>5:45 pm</time><div><strong>Dance battle</strong><span>Aprendemos una coreografía juntas</span></div></li>
+        <li class="reveal"><time>6:45 pm</time><div><strong>Pastel & mañanitas</strong><span>El momento más dulce</span></div></li>
+        <li class="reveal"><time>7:30 pm</time><div><strong>Encore</strong><span>Karaoke y cierre del show</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       6 · DRESS CODE
+       ===================================================================== -->
+  <section class="block dress center">
+    <div class="wrap">
+      <p class="kicker reveal">Dress code</p>
+      <h2 class="title reveal">Rosa, brillos <em>&amp; actitud</em></h2>
+      <div class="swatches reveal" aria-label="Colores sugeridos: rosa, lila, plateado y blanco">
+        <i style="background:#ff8fc4"></i><i style="background:#c9a7e6"></i><i style="background:linear-gradient(135deg,#fff,#cfc8d8)"></i><i style="background:#fff"></i>
+      </div>
+      <p class="lead reveal">Tonos rosa, lila o plateado. Cómodo para bailar toda la tarde.</p>
+      <p class="hand reveal" style="margin-top:12px">¡no olvides tu mejor pose! ✦</p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       7 · CONFIRMACIÓN
+       ===================================================================== -->
+  <section class="block rsvp center" id="confirmar">
+    <div class="wrap">
+      <p class="kicker reveal">Confirma tu pase</p>
+      <h2 class="title reveal">¿Vienes al <em>show?</em></h2>
+      <p class="lead reveal">Confírmanos antes del <strong>9 de enero</strong> para apartar tu lugar.</p>
+
+      <form class="form reveal" id="rsvpForm" novalidate>
+        <div class="field">
+          <label for="guest">Nombre de la invitada o invitado</label>
+          <input id="guest" name="guest" autocomplete="name" placeholder="Ej. Camila Torres" required>
+        </div>
+        <div class="field">
+          <span class="label" id="attendLabel">¿Asistirás?</span>
+          <div class="choice" role="radiogroup" aria-labelledby="attendLabel">
+            <input type="radio" id="yes" name="attend" value="si" checked><label for="yes">✦ ¡Ahí estaré!</label>
+            <input type="radio" id="no" name="attend" value="no"><label for="no">No podré ir</label>
+          </div>
+        </div>
+        <div class="field" id="countField">
+          <span class="label" id="countLabel">¿Cuántas personas en total?</span>
+          <div class="stepper" aria-labelledby="countLabel">
+            <button type="button" data-step="-1" aria-label="Menos personas">−</button>
+            <output id="people" aria-live="polite">1</output>
+            <button type="button" data-step="1" aria-label="Más personas">+</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="note">Mensaje para Regina (opcional)</label>
+          <textarea id="note" name="note" placeholder="¡Feliz cumple, estrella! ✦"></textarea>
+        </div>
+        <button class="btn block" type="submit">Confirmar por WhatsApp</button>
+        <p class="form-note">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+        <div class="demo-box" id="demoBox" hidden></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="hand">¡te espero para brillar juntas!</p>
+    <p style="margin-top:6px">Con cariño, Regina y familia ♡</p>
+    <small>Invitación de muestra · datos ficticios<br>Una experiencia <a href="https://infinity-ai-agency.github.io/evora-digital/">ÉVORA</a></small>
+  </div>
+</footer>
+
+<a class="evora-back" href="https://infinity-ai-agency.github.io/evora-digital/" aria-label="Volver al catálogo de ÉVORA">← ÉVORA</a>
+<button class="music" id="musicBtn" type="button" aria-label="Reproducir música" aria-pressed="false" hidden>♪</button>
+<audio id="song" preload="none" loop></audio>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+'use strict';
+
+/* =====================================================================
+   DATOS DEL EVENTO — cambia aquí para un cliente real.
+   (Los textos visibles están en el HTML; aquí va lo que usan los botones.)
+   ===================================================================== */
+const EVENT = {
+  name: 'Regina',
+  title: 'Cumpleaños de Regina · Pop Star Party',
+  start: '2027-01-16T16:00:00-06:00',   // fecha y hora de inicio (hora de Puerto Vallarta)
+  end:   '2027-01-16T20:00:00-06:00',
+  place: 'Jardín Aurora',
+  address: 'Av. de las Estrellas 123, Puerto Vallarta, Jal.',
+  mapsUrl: '',          // pega aquí el link de Google Maps del lugar real; si queda vacío se busca la dirección
+  whatsapp: '',         // número del organizador: 52 + 1 + 10 dígitos. Vacío = modo demostración
+  music: '',            // archivo de audio, ej. 'cancion.mp3'. Vacío = sin botón de música
+  maxPeople: 6,
+};
+
+const $ = (s) => document.querySelector(s);
+
+/* Brillos ----------------------------------------------------------------- */
+const STAR = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6.2 5.8 11.4 12 12-6.2.6-11.4 5.8-12 12-.6-6.2-5.8-11.4-12-12C6.2 11.4 11.4 6.2 12 0z"/></svg>';
+document.querySelectorAll('[data-sparkles]').forEach((box) => {
+  const n = Number(box.dataset.sparkles);
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement('span');
+    s.className = 'sparkle';
+    s.innerHTML = STAR;
+    s.style.cssText = `left:${Math.random() * 96}%;top:${Math.random() * 96}%;--s:${8 + Math.random() * 16}px;--d:${2.6 + Math.random() * 3}s;--delay:${Math.random() * 4}s`;
+    box.append(s);
+  }
+});
+
+/* Abrir el pase ------------------------------------------------------------ */
+const song = $('#song');
+if (EVENT.music) { song.src = EVENT.music; $('#musicBtn').hidden = false; }
+
+function setMusic(on) {
+  if (!EVENT.music) return;
+  if (on) song.play().then(() => updateMusic(true)).catch(() => updateMusic(false));
+  else { song.pause(); updateMusic(false); }
+}
+function updateMusic(on) {
+  $('#musicBtn').classList.toggle('playing', on);
+  $('#musicBtn').setAttribute('aria-pressed', String(on));
+  $('#musicBtn').setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música');
+}
+$('#musicBtn').addEventListener('click', () => setMusic(song.paused));
+
+$('#openBtn').addEventListener('click', () => {
+  const intro = $('#intro');
+  intro.classList.add('opening');
+  setMusic(true);                      // el navegador permite audio tras un toque
+  setTimeout(() => {
+    intro.classList.add('gone');
+    document.body.classList.remove('locked');
+    window.scrollTo(0, 0);
+  }, 650);
+  setTimeout(() => intro.remove(), 1600);
+});
+
+/* Aparición al hacer scroll ------------------------------------------------ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+/* Cuenta regresiva --------------------------------------------------------- */
+const target = new Date(EVENT.start).getTime();
+const pad = (n) => String(n).padStart(2, '0');
+function tick() {
+  const diff = target - Date.now();
+  if (diff <= 0) { $('#countdown').hidden = true; $('#countDone').hidden = false; return; }
+  const parts = { d: Math.floor(diff / 864e5), h: Math.floor(diff / 36e5) % 24, m: Math.floor(diff / 6e4) % 60, s: Math.floor(diff / 1e3) % 60 };
+  for (const k in parts) document.querySelector(`[data-unit="${k}"]`).textContent = pad(parts[k]);
+  setTimeout(tick, 1000);
+}
+tick();
+
+/* Mapa y calendario -------------------------------------------------------- */
+$('#mapBtn').href = EVENT.mapsUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(EVENT.address);
+
+$('#calBtn').addEventListener('click', () => {
+  const f = (iso) => new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//EVORA//Pop Star Party//ES', 'BEGIN:VEVENT',
+    'UID:popstar-' + f(EVENT.start) + '@evora', 'DTSTAMP:' + f(new Date().toISOString()),
+    'DTSTART:' + f(EVENT.start), 'DTEND:' + f(EVENT.end), 'SUMMARY:' + EVENT.title,
+    'LOCATION:' + EVENT.place + ', ' + EVENT.address, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+  a.download = 'cumple-regina.ics';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast('Fecha lista para tu calendario ✦');
+});
+
+/* Confirmación por WhatsApp ------------------------------------------------ */
+let people = 1;
+document.querySelectorAll('[data-step]').forEach((b) => b.addEventListener('click', () => {
+  people = Math.min(EVENT.maxPeople, Math.max(1, people + Number(b.dataset.step)));
+  $('#people').textContent = people;
+}));
+document.querySelectorAll('input[name="attend"]').forEach((r) => r.addEventListener('change', () => {
+  $('#countField').hidden = $('#no').checked;
+}));
+
+$('#rsvpForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const guest = $('#guest').value.trim();
+  if (!guest) { $('#guest').focus(); toast('Escribe tu nombre ✦'); return; }
+  const going = $('#yes').checked;
+  const note = $('#note').value.trim();
+  const msg = [
+    `Hola ✦ Soy ${guest}.`,
+    going ? `¡Confirmo mi asistencia al cumpleaños de ${EVENT.name}! Seremos ${people} ${people === 1 ? 'persona' : 'personas'}.`
+          : `Gracias por la invitación al cumpleaños de ${EVENT.name}, esta vez no podré asistir.`,
+    note ? `\nMensaje: ${note}` : '',
+  ].join('\n').trim();
+
+  if (EVENT.whatsapp) {
+    window.open('https://wa.me/' + EVENT.whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  } else {
+    // Modo demostración: mostramos el mensaje que se enviaría.
+    $('#demoBox').textContent = 'Demostración — este es el mensaje que llegaría por WhatsApp:\n\n' + msg;
+    $('#demoBox').hidden = false;
+    toast(going ? '¡Pase confirmado! ✦' : 'Respuesta lista ♡');
+  }
+});
+
+/* Aviso breve -------------------------------------------------------------- */
+let toastTimer;
+function toast(text) {
+  $('#toast').textContent = text;
+  $('#toast').hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { $('#toast').hidden = true; }, 2600);
+}
+</script>
+</body>
+</html>
